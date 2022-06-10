@@ -2,12 +2,12 @@
 class cohortManager {
 
     constructor() {
-        this.cohorts = {}
+        this.cohorts = []
         this.id = 0
     }
 
     addCohort(name) {
-        this.cohorts[name] = {}
+        this.cohorts.push({[name]: {}})
         return this.cohorts
     }
 }

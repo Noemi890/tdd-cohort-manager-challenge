@@ -8,7 +8,7 @@ describe("cohortManager", () => {
   })
 
   it("add a new Cohort", () => {
-      const expected = {cohortSix: {}}
+      const expected = [{cohortSix: {}}]
         const result = cohort_manager.addCohort("cohortSix")
         expect(result).toEqual(expected)
     }
