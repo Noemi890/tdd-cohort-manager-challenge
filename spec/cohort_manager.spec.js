@@ -9,7 +9,7 @@ describe("cohortManager", () => {
   })
 
   it("add a new Cohort", () => {
-      const expected = [{cohortSix: {}}]
+      const expected = [{cohortSix: []}]
         const result = cohort_manager.addCohort("cohortSix")
         expect(result).toEqual(expected)
     }
@@ -19,8 +19,39 @@ describe("cohortManager", () => {
     cohort_manager.addCohort("cohortSix")
     cohort_manager.addCohort("cohortEight")
     cohort_manager.addCohort("cohortFive")
-    const expected = {cohortSix: {}}
+    const expected = {cohortSix: []}
     const result = cohort_manager.searchByName("cohortSix")
+    expect(result).toEqual(expected)
+  })
+
+  it("create a student", () => {
+    const expected = {
+        name: "guy1",
+        surname: "guy1",
+        github: "guy11",
+        email: "guy1@gmail.com",
+        id: 1
+    }
+    const result = cohort_manager.createAStudent("guy1", "guy1", "guy11", "guy1@gmail.com")
+    expect(result).toEqual(expected)
+    })
+
+  it("add a student to a specific cohort", () => {
+    cohort_manager.addCohort("cohortSix")
+    cohort_manager.addCohort("cohortEight")
+    cohort_manager.addCohort("cohortFive")
+    const expected = {
+        cohortSix: [
+            {
+                name: "guy1",
+                surname: "guy1",
+                github: "guy11",
+                email: "guy1@gmail.com",
+                id: 1
+            }
+        ]
+    }
+    const result = cohort_manager.addAStudent("cohortSix")
     expect(result).toEqual(expected)
   })
 })
