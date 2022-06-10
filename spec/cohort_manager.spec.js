@@ -1,3 +1,4 @@
+const { ExternalCampaignInstance } = require('twilio/lib/rest/messaging/v1/externalCampaign')
 const cohortManager = require('../src/cohort_manager')
 
 describe("cohortManager", () => {
@@ -13,6 +14,15 @@ describe("cohortManager", () => {
         expect(result).toEqual(expected)
     }
   )
+
+  it("search cohort by name", () => {
+    cohort_manager.addCohort("cohortSix")
+    cohort_manager.addCohort("cohortEight")
+    cohort_manager.addCohort("cohortFive")
+    const expected = {cohortSix: {}}
+    const result = cohort_manager.searchByName("cohortSix")
+    expect(result).toEqual(expected)
+  })
 })
 
 
