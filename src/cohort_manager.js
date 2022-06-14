@@ -1,43 +1,54 @@
+const Cohort = require('./cohort')
 
-class cohortManager {
+class CohortManager {
+  constructor() {
+    this.cohorts = []
+  }
 
-    constructor() {
-        this.cohorts = []
-        this.id = 1
+  addCohort(name) {
+    const cohort = new Cohort(name)
+    this.cohorts.push(cohort)
+    return cohort
+  }
+
+  getByName(name) {
+    for (let i = 0; i < this.cohorts.length; i++) {
+      if (this.cohorts[i].name === name) {
+        return this.cohorts[i]
+      }
     }
+    return 'Invalid Cohort'
+  }
 
-    addCohort(name) {
-        this.cohorts.push({[name]: []})
+  addStudent(cohort, name, surname, email, github) {
+        const myCohort = this.getByName(cohort)
+        // console.log(myCohort)
+        myCohort.createAStudent(name, surname, email, github)
+        // console.log('all Cohorts', this.cohorts)
+        // console.log('my cohort', myCohort)
+        return myCohort
+  }
+
+  removeCohort(cohort) {
+    for (let i = 0; i < this.cohorts.length; i++) {
+      if (this.cohorts[i].name === cohort) {
+        this.cohorts.splice(i, 1)
         return this.cohorts
+      }
     }
+  }
 
-    searchByName(name) {
-        // console.log("list of cohorts", this.cohorts)
-        const cohortName = this.cohorts.find(cohort => cohort[name])
-        // console.log("searched cohort", cohortName)
-        return cohortName;
+  removeStudent(name, cohort) {
+    const myCohort = this.getByName(cohort)
+    for (let i = 0; i < myCohort.students.length; i++) {
+      if (myCohort.students[i].name === name) {
+        myCohort.students.splice(i, 1)
+        console.log('final cohort =>', myCohort)
+        return myCohort
+      }
     }
-
-    createAStudent(name, surname, github, email) {
-        const newStudent = {
-            name: name,
-            surname: surname,
-            github: github,
-            email: email,
-            id: this.id
-        }
-        console.log("my new student", newStudent)
-        this.id++
-        return newStudent
-    }
-
-    addAStudent(name) {
-        const cohortName = this.cohorts.find(cohort => cohort[name])
-        // console.log("searched cohort", cohortName)
-        cohortName[name].push(this.createAStudent("guy1", "guy1", "guy11", "guy1@gmail.com"))
-        // console.log("student added to cohort", cohortName)
-        return cohortName
-    }
+    return 'Invalid Student'
+  }
 }
 
-module.exports = cohortManager
+module.exports = CohortManager
