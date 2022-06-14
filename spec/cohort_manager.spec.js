@@ -63,7 +63,7 @@ it('add a student to cohort', () => {
     expect(result).toEqual(expected)
   })
 
-  fit('remove a student from cohort', () => {
+  it('remove a student from cohort', () => {
     const myCohort = cohort_manager.addCohort("cohortSix")
     cohort_manager.addStudent('cohortSix', 'guy1', 'guy1', 'guy1@gmail.com', 'guy11')
     cohort_manager.addStudent('cohortSix', 'guy2', 'guy2', 'guy2@gmail.com', 'guy22')
