@@ -31,3 +31,24 @@ As a Cohort-Manager, so that I can manage my student, I want to remove a student
 | ------ | ------ | ------ 
 | removeStudent(name(@string)) | student found | return cohort without the student |
 | | student not found | Invalid Student |
+```
+As a Cohort Manager, so that I can not make mistakes, i want to know if i reached the max capacity of a cohort.
+```
+| Method | Scenario | Output|
+| ------ | ------ | ------ 
+| checkCapacity() | capacity reached | return true |
+| | capacity not reached | return false |
+```
+As a Cohort-Manager, so that I can not make mistakes, I want to know if a Cohort already exist.
+```
+| Method | Scenario | Output|
+| ------ | ------ | ------ 
+| addCohort(name(@string)) | found | Cohort already existing |
+| | not found | adds cohort |
+```
+As a Cohort Manager, so that I can not make mistakes, I want to Know if I forget to name my cohort.
+```
+| Method | Scenario | Output|
+| ------ | ------ | ------ 
+| addCohort(name(@string)) | valid name | create cohort |
+| | invalid name | Cohort name not valid |

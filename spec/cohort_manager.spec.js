@@ -46,7 +46,6 @@ it('add a student to cohort', () => {
         ]
     }
     const result = cohort_manager.addStudent('cohortSix', 'guy1', 'guy1', 'guy1@gmail.com', 'guy11')
-    // expect(result.name).toEqual(expected.name)
     expect(result.name).toEqual(expected.name)
     expect(result.students).toEqual(expected.students)
 })
@@ -67,7 +66,6 @@ it('add a student to cohort', () => {
     const myCohort = cohort_manager.addCohort("cohortSix")
     cohort_manager.addStudent('cohortSix', 'guy1', 'guy1', 'guy1@gmail.com', 'guy11')
     cohort_manager.addStudent('cohortSix', 'guy2', 'guy2', 'guy2@gmail.com', 'guy22')
-    console.log('Initial Cohort =>', myCohort)
     const expected = {
         name: 'cohortSix',
         students: [
@@ -77,5 +75,27 @@ it('add a student to cohort', () => {
     const result = cohort_manager.removeStudent('guy2', 'cohortSix')
     expect(result.name).toEqual(expected.name)
     expect(result.students).toEqual(expected.students)
+    })
+
+    it('return an error if student capacity is reached', () => {
+        cohort_manager.addCohort("cohortSix")
+        cohort_manager.addStudent('cohortSix', 'guy1', 'guy1', 'guy1@gmail.com', 'guy11')
+        cohort_manager.addStudent('cohortSix', 'guy2', 'guy2', 'guy2@gmail.com', 'guy22')
+        const expected = 'Max Students reached'
+        const result = cohort_manager.addStudent('cohortSix', 'guy2', 'guy2', 'guy2@gmail.com', 'guy22')
+        expect(result).toEqual(expected)
+    })
+
+    it('return an error if cohort already existing', () => {
+        cohort_manager.addCohort("cohortSix")
+        const expected = 'Cohort already existing'
+        const result = cohort_manager.addCohort("cohortSix")
+        expect(result).toEqual(expected)
+    })
+
+    it('return an error if cohort name is not defined', () => {
+        const expected = 'Cohort name not valid'
+        const result = cohort_manager.addCohort()
+        expect(result).toEqual(expected)
     })
   })

@@ -6,6 +6,14 @@ class CohortManager {
   }
 
   addCohort(name) {
+    for (let i = 0; i < this.cohorts.length; i++) {
+      if (this.cohorts[i].name === name) {
+        return 'Cohort already existing'
+      }
+    }
+    if(name === undefined) {
+      return 'Cohort name not valid'
+    }
     const cohort = new Cohort(name)
     this.cohorts.push(cohort)
     return cohort
@@ -22,10 +30,10 @@ class CohortManager {
 
   addStudent(cohort, name, surname, email, github) {
         const myCohort = this.getByName(cohort)
-        // console.log(myCohort)
-        myCohort.createAStudent(name, surname, email, github)
-        // console.log('all Cohorts', this.cohorts)
-        // console.log('my cohort', myCohort)
+        const student = myCohort.createAStudent(name, surname, email, github)
+        if(student === 'Max Students reached') {
+          return student
+        }
         return myCohort
   }
 
@@ -43,7 +51,6 @@ class CohortManager {
     for (let i = 0; i < myCohort.students.length; i++) {
       if (myCohort.students[i].name === name) {
         myCohort.students.splice(i, 1)
-        console.log('final cohort =>', myCohort)
         return myCohort
       }
     }
